@@ -1,21 +1,20 @@
 # hls-decryptor
 
-hls proxy that will decrypt segment files of another hls playlist
-
-```
-npm install -g hls-decryptor
-```
+HLS decryption tool that downloads and converts the provided stream to MKV.
 
 ## Usage
 
 Simply pass a link to http live streaming server
 
 ```
-hls-decryptor http://some-hls-server.com/index.m3u8
+hls-decryptor http://some-hls-server.com/index.m3u8 output.mkv
 ```
 
 If the playlist contains encrypted segments hls-decryptor will decrypt them for you.
-I needed this to make encrypted streams work on my raspberry pi.
+
+## Requirements
+
+This script needs ffmpeg to run.
 
 ## License
 
