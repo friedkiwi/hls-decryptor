@@ -5,6 +5,9 @@ var url = require('url')
 var crypto = require('crypto')
 var root = require('root')
 var minimist = require('minimist')
+var sys = require('sys');
+var childProcess = require('child_process');
+
 
 var argv = minimist(process.argv, {
   alias: {p:'port', q:'quiet', v:'version', r:'redirect'},
@@ -14,10 +17,11 @@ var argv = minimist(process.argv, {
 if (argv.version) return console.error(require('./package').version)
 
 var playlist = argv._[2]
+var output_file = argv._[3]
 
-if (!playlist) {
+if (!playlist || !output_file) {
   console.error(
-    'Usage: hms-decryptor playlist_url [options]\n\n'+
+    'Usage: hms-decryptor playlist_url output_file.mkv [options]\n\n'+
     '  --port,     -p    set the port. defaults to 9999\n'+
     '  --version,  -v    print the version\n'+
     '  --quiet,    -q    do not print any logs\n'+
@@ -163,4 +167,10 @@ app.get('/ts', function(req, res) {
 
 app.listen(argv.port || 9999, function(addr) {
   console.log('Listening on http://'+addr+'/index.m3u8')
+  var child = require('child_process').exec('ffmpeg -y -i http://'+addr+'/index.m3u8 -vcodec copy -acodec copy "' + output_file + '"')
+  child.stdout.pipe(process.stdout)
+  child.on('exit', function() {
+    process.exit()
+  })
+
 })

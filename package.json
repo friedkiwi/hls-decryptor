@@ -1,15 +1,15 @@
 {
-  "name": "hls-decryptor",
-  "description": "hls proxy that will decrypt segment files of another hls playlist",
-  "version": "1.2.0",
-  "repository": "mafintosh/hls-decryptor",
+  "name": "hls-decryptor-ng",
+  "description": "hls stream decryptor which automatically downloads and decrypts/re-encodes HLS streams",
+  "version": "1.0.0",
+  "repository": "friedkiwi/hls-decryptor",
   "dependencies": {
     "minimist": "^0.2.0",
     "request": "^2.36.0",
     "root": "^0.7.1"
   },
   "bin": {
-    "hls-decryptor": "index.js"
+    "hls-decryptor-ng": "index.js"
   },
   "keywords": [
     "http",
